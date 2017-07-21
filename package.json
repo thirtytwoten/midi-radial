@@ -1,0 +1,22 @@
+{
+  "name": "midi-radial",
+  "version": "1.0.0",
+  "description": "work in progress: d3 stacked radial area graph to display cyclical rhythm patterns of notes played by unit of [measure, phrase, etc]",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thirtytwoten/midi-radial.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thirtytwoten/midi-radial/issues"
+  },
+  "homepage": "https://github.com/thirtytwoten/midi-radial#readme",
+  "dependencies": {
+    "express": "^4.15.3"
+  }
+}
