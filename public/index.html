@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="//d3js.org/d3.v4.min.js"></script>
+</head>
+<body>
+<svg width="960" height="500"></svg>
+<script>
+
+var svg = d3.select("svg");
+
+var parseDate = d3.timeParse("%Y %b %d");
+var z = d3.scaleOrdinal(d3.schemeCategory10);
+
+var ang = d3.scaleTime().range([0,2*Math.PI]);
+var rad = d3.scaleLinear().range([200, 0]);
+
+var stack = d3.stack();
+
+var area = d3.radialArea()
+    .angle(function(d, i) { return ang(d.data.date); })
+    .innerRadius(function(d) { return rad(d[0]); })
+    .outerRadius(function(d) { return rad(d[1]); });
+
+var g = svg.append("g")
+    .attr("transform", "translate(" + 500 + "," + 300 + ")");
+
+d3.tsv("data.tsv", type, function(error, data) {
+  if (error) throw error;
+
+  var keys = data.columns.slice(1);
+
+  ang.domain(d3.extent(data, function(d) { return d.date; }));
+  z.domain(keys);
+  stack.keys(keys);
+
+  var layer = g.selectAll(".layer")
+    .data(stack(data))
+    .enter().append("g")
+      .attr("class", "layer");
+
+  layer.append("path")
+      .attr("class", "area")
+      .style("fill", function(d) { return z(d.key); })
+      .attr("d", area);
+});
+
+function type(d, i, columns) {
+  d.date = parseDate(d.date);
+  for (var i = 1, n = columns.length; i < n; ++i) d[columns[i]] = d[columns[i]] / 100;
+  return d;
+}
+</script>
+</body>
+</html>
