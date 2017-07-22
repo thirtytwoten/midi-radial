@@ -137,6 +137,7 @@ function plotGraph(stackedData) {
   ang.domain([0,BEAT_RESOLUTION * bpMeasure - 1]);
 
   var area = d3.radialArea()
+      .curve(d3.curveBasisClosed)
       .angle(function(d, i) { return ang(d.data.facet) })
       .innerRadius(function(d, i) { return rad(d[0]) })
       .outerRadius(function(d, i) { return rad(d[1]) });
