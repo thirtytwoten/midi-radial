@@ -131,7 +131,7 @@ var g = svg.append("g")
     .attr("transform", "translate(" + 600 + "," + 500 + ")");
 
 var ang = d3.scaleLinear().range([0 , 2 * Math.PI]);
-var rad = d3.scaleLinear().range([50, 80]);
+var rad = d3.scaleLinear().range([20, 80]);
 
 function plotGraph(stackedData) {
   ang.domain([0,BEAT_RESOLUTION * bpMeasure - 1]);
